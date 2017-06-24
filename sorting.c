@@ -2,4 +2,40 @@
 #include <stdlib.h>
 #include "sorting.h"
 
+long * Load_From_File(char * Filename, int * Size) {
+	FILE * inf = fopen(Filename, "r");
+	// Determine how many longs (4 bytes each) are in file
+	fseek(inf, 0, SEEK_END);
+	long len = ftell(inf);
+	* Size = (int)(len / sizeof(long));
+	
+	// Allocate memory to store data from file
+	long * Array = malloc(len);
+	
+	// Read data into array
+	fseek(inf, 0, SEEK_SET);
+	fread(Array, sizeof(long), *Size, inf);
+	fclose(inf);
+	return Array;
+}
 
+int Save_To_File(char * Filename, long * Array, int Size) {
+	FILE * outf = fopen(Filename, "w");
+	int nels = fwrite(Array, sizeof(long), Size, outf);
+	fclose(outf);
+	return nels;
+}
+
+/*
+void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Move) {
+
+}
+
+void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Move) {
+
+}
+
+int Print_Seq(char * Filename, int Size) {
+
+}
+*/
