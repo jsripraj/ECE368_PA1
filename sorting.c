@@ -26,6 +26,42 @@ int Save_To_File(char * Filename, long * Array, int Size) {
 	return nels;
 }
 
+int * Get_Seq(int Size, int *Seq_Nels) {
+	int q = 0, row = 0, i = 0;
+	int t1 = 1, t2 = 1;
+	while(t1 * t2 < Size) {
+		if (q == row) {
+			row++;
+			q = 0;
+			t2 = 1;
+			for (t1 = 1, i = 0; i < row; i++) { t1 *= 2; }
+		} else {
+			q++;
+			t1 /= 2;
+			t2 *= 3;
+		}
+		(*Seq_Nels)++;
+	}
+	int *seq = malloc((*Seq_Nels) * sizeof(int));	
+	int index = 0;
+	i = 0; q = 0; row = 0; t1 = 1; t2 = 1;
+	while(t1 * t2 < Size) {
+		seq[index] = t1 * t2;
+		if (q == row) { 
+			row++; 
+			q = 0;
+			t2 = 1;
+			for (t1 = 1, i = 0; i < row; i++) { t1 *= 2; }
+		} else {
+			q++;
+			t1 /= 2;
+			t2 *= 3;
+		}
+		index++;
+	}
+	return seq;
+}
+
 /*
 void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Move) {
 
@@ -34,8 +70,15 @@ void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Mo
 void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Move) {
 
 }
+*/
 
 int Print_Seq(char * Filename, int Size) {
-
+	FILE * fp = fopen(Filename, "w");
+	int seq_nels = 0;
+	int * seq = Get_Seq(Size, &seq_nels);
+	for (int i = 0; i < seq_nels; i++) {
+		fprintf(fp, "%d\n", seq[i]);
+	}
+	fclose(fp);
+	return seq_nels;
 }
-*/

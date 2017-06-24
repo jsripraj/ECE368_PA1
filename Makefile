@@ -10,8 +10,9 @@ all: sorting.o main.o
 	$(GCC) -c $<
 
 test: all
-	./proj1 i given_files/15.b given_files/15_seq.t test_output
+	./proj1 i given_files/15.b test_seq test_output
 
 clean:
 	/bin/rm -f *.o
 	/bin/rm -f proj1
+	/bin/rm -f test_output test_seq
