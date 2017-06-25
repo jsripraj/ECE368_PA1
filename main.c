@@ -7,6 +7,10 @@ int main(int argc, char **argv) {
 		printf("Not enough arguments");
 		return EXIT_FAILURE;
 	}
+	if (*(argv[1]) != 'i' && *(argv[1]) != 's') {
+		printf("Enter either 'i' or 's' as second arg");
+		return EXIT_FAILURE;
+	}
 	int Size = 0; // Number of elements in Array
 
 	// Load elements from file into an array
@@ -22,7 +26,14 @@ int main(int argc, char **argv) {
 	double comps = 0, moves = 0;
 
 	// Shell insertion sort
-	Shell_Insertion_Sort(Array, Size, &comps, &moves);
+	if (*(argv[1]) == 'i') {
+		Shell_Insertion_Sort(Array, Size, &comps, &moves);
+	}
+
+	// Shell selection sort
+	if (*(argv[1]) == 's') {
+		Shell_Selection_Sort(Array, Size, &comps, &moves);
+	}
 
 	// Write the elements from array into file
 	int nels = Save_To_File(argv[4], Array, Size);

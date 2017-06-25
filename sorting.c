@@ -8,10 +8,10 @@ long * Load_From_File(char * Filename, int * Size) {
 	fseek(inf, 0, SEEK_END);
 	long len = ftell(inf);
 	* Size = (int)(len / sizeof(long));
-	
+
 	// Allocate memory to store data from file
 	long * Array = malloc(len);
-	
+
 	// Read data into array
 	fseek(inf, 0, SEEK_SET);
 	fread(Array, sizeof(long), *Size, inf);
@@ -96,11 +96,39 @@ void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Mo
 	return;
 }
 
-/*
-void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Move) {
-
+void Shell_Selection_Sort(long * Array, int Size, double * N_Comp, double * N_Move) {
+	int i, j, k, min, x; // min is the index of the lowest number found
+	long temp;
+	// Generate sequence
+	int seq_nels = 0;
+	int *seq = Get_Seq(Size, &seq_nels);
+	// For each number in sequence (going backwards)...
+	for (i = seq_nels - 1; i >= 0; i--) {
+		// For each "column" in shell sort...
+		for (j = 0; j < seq[i]; j++) {
+			// For each number in column
+			for (k = j; k < Size; k += seq[i]) {
+				// Find the index of the minimum number
+				min = k;
+				for (x = k + seq[i]; x < Size; x += seq[i]) {
+					(*N_Comp)++;
+					if (Array[x] < Array[min]) {
+						min = x;
+					}
+				}
+				// Swap the numbers at the cursor and min indexes
+				if (min != k) {
+					(*N_Move) += 3;
+					temp = Array[k];
+					Array[k] = Array[min];
+					Array[min] = temp;
+				}
+			}
+		}
+	}
+	free(seq);
+	return;
 }
-*/
 
 int Print_Seq(char * Filename, int Size) {
 	FILE * fp = fopen(Filename, "w");
