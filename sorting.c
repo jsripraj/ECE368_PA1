@@ -32,36 +32,19 @@ int Save_To_File(char * Filename, long * Array, int Size) {
 }
 
 static int * Get_Seq(int Size, int *Seq_Nels) {
-	int q = 0, row = 0, i = 0; // q is from 3^q, row is "pyramid" row
-	int t1 = 1, t2 = 1; // t1 = 2^p, t2 = 3^q
+	int q = 0, row = 0, i = 0, index = 0, t1 = 1, t2 = 1;
+	int *seq = NULL;
 	// The product of the terms should always be less than Size
-	while(t1 * t2 < Size) {	
-		(*Seq_Nels)++; // Counted an element
+	while(t1 * t2 < Size) {
+		seq = realloc(seq, (index + 1) * sizeof(int));
+		seq[index] = t1 * t2;
+		index++;
 		// Calculate the next element in the sequence
 		q++;
 		t1 /= 2;
 		t2 *= 3;
 		// If you reach the end of a row or the next element is greater
 		// than Size, move to the next row and set t1 and t2 appropriately
-		if (q > row || t1 * t2 >= Size) {
-			row++;
-			q = 0;
-			t2 = 1;
-			for (t1 = 1, i = 0; i < row; i++) { t1 *= 2; }
-		}
-	}
-
-	int *seq = malloc((*Seq_Nels) * sizeof(int));
-
-	int index = 0;
-	i = 0; q = 0; row = 0; t1 = 1; t2 = 1;
-	// Same algorithm. But this time store the sequence in the array
-	while(t1 * t2 < Size) {
-		seq[index] = t1 * t2;
-		index++;
-		q++;
-		t1 /= 2;
-		t2 *= 3;
 		if (q > row || t1 * t2 >= Size) { 
 			row++; 
 			q = 0;
@@ -69,6 +52,7 @@ static int * Get_Seq(int Size, int *Seq_Nels) {
 			for (t1 = 1, i = 0; i < row; i++) { t1 *= 2; }
 		}
 	}
+	*Seq_Nels = index;
 	return seq;
 }
 
