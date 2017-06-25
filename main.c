@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
 	io_t += ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 
 	// Print information to stdout
-	printf("Number of long integers read: %d\n", Size);
+	printf("\nNumber of long integers read: %d\n", Size);
 	printf("Number of long integers stored: %d\n", nels_w);
 	printf("Length of sequence: %d\n", Seq_Size);
 	printf("Number of comparisons: %le\n", comps);
