@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "sorting.h"
 
+// Helper function
+// Calculates how many sequence els, Seq_Nels, needed for an array of Size els
+// Returns pointer to an array containing the sequence
+static int * Get_Seq(int Size, int *Seq_Nels);
+	
 long * Load_From_File(char * Filename, int * Size) {
 	FILE * inf = fopen(Filename, "r");
 	// Determine how many longs (4 bytes each) are in file
@@ -26,7 +31,7 @@ int Save_To_File(char * Filename, long * Array, int Size) {
 	return nels;
 }
 
-int * Get_Seq(int Size, int *Seq_Nels) {
+static int * Get_Seq(int Size, int *Seq_Nels) {
 	int q = 0, row = 0, i = 0; // q is from 3^q, row is "pyramid" row
 	int t1 = 1, t2 = 1; // t1 is first term (2^p), t2 is second term (3^q)
 	while(t1 * t2 < Size) {

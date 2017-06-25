@@ -6,10 +6,6 @@ long * Load_From_File(char * Filename, int * Size);
 // Returns the number of long ints successfully saved to file
 int Save_To_File(char * Filename, long * Array, int Size);
 
-// Calculates how many sequence elements, Seq_Nels, needed for an array of Size elements
-// Returns pointer to an array containing the sequence
-int * Get_Seq(int Size, int * Seq_Nels);
-
 // Takes in Array of Size longs and Shell sorts them (with insertion or selection sort)
 // N_Comp and N_Move are the number of comparisons and moves made by the funtion
 void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Move);
