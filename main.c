@@ -31,5 +31,6 @@ int main(int argc, char **argv) {
 	for (int i = 0; i < Size; i++) {
 		printf("\n%ld", Array[i]);
 	}
+	free(Array);
 	return 0;
 }

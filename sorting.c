@@ -92,6 +92,7 @@ void Shell_Insertion_Sort(long * Array, int Size, double * N_Comp, double * N_Mo
 			}
 		}
 	}
+	free(seq);
 	return;
 }
 
@@ -111,5 +112,6 @@ int Print_Seq(char * Filename, int Size) {
 		fprintf(fp, "%d\n", seq[i]);
 	}
 	fclose(fp);
+	free(seq);
 	return seq_nels;
 }

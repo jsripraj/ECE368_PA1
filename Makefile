@@ -12,6 +12,9 @@ all: sorting.o main.o
 test: all
 	./proj1 i given_files/15.b test_seq test_output
 
+memory:
+	valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes proj1 i given_files/15.b test_seq test_output
+
 clean:
 	/bin/rm -f *.o
 	/bin/rm -f proj1
