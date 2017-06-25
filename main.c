@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 	// Print out the sequence
 	int Seq_Size = Print_Seq(argv[3], Size);
 	end_t = clock();
-	io_t += (double)(end_t - start_t) / CLOCKS_PER_SEC;
+	io_t += ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 	
 	double comps = 0, moves = 0; // num of comparisons and moves
 	// Shell insertion sort
@@ -31,21 +31,21 @@ int main(int argc, char **argv) {
 		start_t = clock();
 		Shell_Insertion_Sort(Array, Size, &comps, &moves);
 		end_t = clock();
-		sorting_t += (double)(end_t - start_t) / CLOCKS_PER_SEC;
+		sorting_t += ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 	}
 	// Shell selection sort
 	if (*(argv[1]) == 's') {
 		start_t = clock();
 		Shell_Selection_Sort(Array, Size, &comps, &moves);
 		end_t = clock();
-		sorting_t += (double)(end_t - start_t) / CLOCKS_PER_SEC;
+		sorting_t += ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 	}
 
 	// Write the elements from array into file
 	start_t = clock();
 	int nels_w = Save_To_File(argv[4], Array, Size);
 	end_t = clock();
-	io_t += (double)(end_t - start_t) / CLOCKS_PER_SEC;
+	io_t += ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 
 	// Print information to stdout
 	printf("Number of long integers read: %d\n", Size);
