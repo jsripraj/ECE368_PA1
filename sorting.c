@@ -128,8 +128,10 @@ int Print_Seq(char * Filename, int Size) {
 	// Generate the sequence
 	int * seq = Get_Seq(Size, &seq_nels);
 	// Write to file
-	for (int i = 0; i < seq_nels; i++) {
+	int i = 0;
+	while (i < seq_nels) {
 		fprintf(fp, "%d\n", seq[i]);
+		i++;
 	}
 	fclose(fp);
 	free(seq);
