@@ -5,11 +5,11 @@
 
 int main(int argc, char **argv) {
 	if (argc != 5) {
-		printf("Not enough arguments");
+		printf("Not enough arguments\n");
 		return EXIT_FAILURE;
 	}
 	if (*(argv[1]) != 'i' && *(argv[1]) != 's') {
-		printf("Enter either 'i' or 's' as second arg");
+		printf("Enter either 'i' or 's' as second arg\n");
 		return EXIT_FAILURE;
 	}
 	int Size = 0; // Number of elements in Array
