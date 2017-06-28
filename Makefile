@@ -10,11 +10,12 @@ all: sorting.o main.o
 	$(GCC) -c $<
 
 test: all
-	time ./proj1 i given_files/15.b test_seq test_output
-	time ./proj1 i given_files/1000.b test_seq test_output
-	time ./proj1 i given_files/10000.b test_seq test_output
-	time ./proj1 i given_files/100000.b test_seq test_output
-	time ./proj1 i given_files/1000000.b test_seq test_output
+	./proj1 s empty test_seq test_output
+#	time ./proj1 i given_files/15.b test_seq test_output
+#	time ./proj1 i given_files/1000.b test_seq test_output
+#	time ./proj1 i given_files/10000.b test_seq test_output
+#	time ./proj1 i given_files/100000.b test_seq test_output
+#	time ./proj1 i given_files/1000000.b test_seq test_output
 #	time ./proj1 s given_files/15.b test_seq test_output
 #	time ./proj1 s given_files/1000.b test_seq test_output
 #	time ./proj1 s given_files/10000.b test_seq test_output
@@ -22,7 +23,7 @@ test: all
 #	time ./proj1 s given_files/1000000.b test_seq test_output
 
 memory:
-	valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes proj1 s given_files/1000.b test_seq test_output
+	valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes proj1 s empty test_seq test_output
 
 clean:
 	/bin/rm -f *.o

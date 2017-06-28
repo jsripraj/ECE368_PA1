@@ -9,13 +9,20 @@ static int * Get_Seq(int Size, int *Seq_Nels);
 	
 long * Load_From_File(char * Filename, int * Size) {
 	FILE * inf = fopen(Filename, "r");
+	if (inf == NULL) {
+		perror("Error: ");
+		return (long *)EXIT_FAILURE;
+	}
 	// Determine how many longs (4 bytes each) are in file
 	fseek(inf, 0, SEEK_END);
 	long len = ftell(inf);
 	* Size = (int)(len / sizeof(long));
 
 	// Allocate memory to store data from file
-	long * Array = malloc(len);
+	long * Array = NULL; 
+	if (*Size > 0) {
+		Array = malloc(len);
+	}
 
 	// Read data into array
 	fseek(inf, 0, SEEK_SET);
@@ -26,6 +33,10 @@ long * Load_From_File(char * Filename, int * Size) {
 
 int Save_To_File(char * Filename, long * Array, int Size) {
 	FILE * outf = fopen(Filename, "w");
+	if (outf == NULL) {
+		perror("Error: ");
+		return EXIT_FAILURE;
+	}
 	int nels = fwrite(Array, sizeof(long), Size, outf);
 	fclose(outf);
 	return nels;
@@ -124,6 +135,10 @@ void Shell_Selection_Sort(long * Array, int Size, double * N_Comp, double * N_Mo
 
 int Print_Seq(char * Filename, int Size) {
 	FILE * fp = fopen(Filename, "w");
+	if (fp == NULL) {
+		perror("Error: ");
+		return EXIT_FAILURE;
+	}
 	int seq_nels = 0;
 	// Generate the sequence
 	int * seq = Get_Seq(Size, &seq_nels);

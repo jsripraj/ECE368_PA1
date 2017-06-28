@@ -19,8 +19,11 @@ int main(int argc, char **argv) {
 	// Load elements from file into an array
 	start_t = clock();
 	long * Array = Load_From_File(argv[2], &Size);
+	if (Array == (long *)EXIT_FAILURE) {
+		return EXIT_FAILURE;
+	}
 
-	// Print out the sequence
+	// Print out the sequence to file
 	int Seq_Size = Print_Seq(argv[3], Size);
 	end_t = clock();
 	io_t += ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
